@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class NordeaExceptionHandlerAdvice {
 
-    @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<String> handleException(RuntimeException e) {
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<String> handleException(IllegalArgumentException e) {
         return ResponseEntity.badRequest().body(e.getMessage());
     }
 

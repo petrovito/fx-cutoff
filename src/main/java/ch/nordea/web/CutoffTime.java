@@ -7,6 +7,12 @@ import lombok.NonNull;
 
 import java.time.LocalTime;
 
+/**
+ * Cutoff time web entity.
+ * <p>
+ * This entity is used to store the cutoff time for a currency on a given date.
+ * </p>
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

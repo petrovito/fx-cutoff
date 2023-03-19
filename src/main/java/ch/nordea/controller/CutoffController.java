@@ -22,6 +22,13 @@ public class CutoffController {
     @Autowired
     private CutoffProvider cutoffProvider;
 
+    /**
+     * Returns the cutoff time for the given currencies on the given date.
+     * @param iso1 currency iso code
+     * @param iso2 currency iso code
+     * @param date date
+     * @return cutoff time
+     */
     @RequestMapping(value = "/time", method = GET)
     public CutoffTime getCutoffTime(
             @RequestParam(value = "iso1") String iso1,

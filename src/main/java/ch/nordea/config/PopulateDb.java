@@ -9,12 +9,18 @@ import ch.nordea.web.CutoffType;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.context.annotation.Configuration;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+/**
+ * Dumb Spring configuration class.
+ * Populates the database with static currency and cutoff data.
+ */
 @Configuration
+@ConditionalOnExpression("${ch.populate-db:false}")
 public class PopulateDb implements InitializingBean {
 
     //TODO read from file
@@ -24,7 +30,7 @@ public class PopulateDb implements InitializingBean {
             BGN|Bulgaria
             CAD|Canada
             CHF|Switzerland
-            CNH|China Hong Kong)
+            CNH|China (Hong Kong)
             CZK|Czech Republic
             DKK|Denmark
             EUR|Euro Area

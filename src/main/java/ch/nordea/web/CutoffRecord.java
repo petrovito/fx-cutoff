@@ -4,9 +4,18 @@ import lombok.Data;
 
 import java.time.LocalDate;
 
+/**
+ * Cutoff record web entity.
+ * <p>
+ * This entity is used to store the cutoff time for a currency on a given date.
+ * </p>
+ */
 @Data
 public class CutoffRecord {
 
+    /**
+     * The currency for which the cutoff time is defined.
+     */
     private Currency currency;
 
     /**

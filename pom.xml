@@ -74,7 +74,7 @@
 								<snippets>${snippetsDirectory}</snippets>
 							</attributes>
 							<sourceDirectory>src/docs/asciidocs</sourceDirectory>
-							<outputDirectory>target/generated-docs</outputDirectory>
+							<outputDirectory>src/main/resources/static</outputDirectory>
 						</configuration>
 					</execution>
 				</executions>
