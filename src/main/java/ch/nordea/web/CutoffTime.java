@@ -1,21 +1,40 @@
 package ch.nordea.web;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 import java.time.LocalTime;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class CutoffTime implements Comparable<CutoffTime> {
 
     /**
      * Type of cutoff: NEVER, UNTIL, ALWAYS. If UNTIL then the cutoffTime is also set.
      */
+    @NonNull
     private CutoffType cutoffType;
 
     /**
      * The cutoff time for the currency on the given date.
      */
     private LocalTime cutoffTime;
+
+
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        CutoffTime that = (CutoffTime) o;
+        if (cutoffType != that.cutoffType) return false;
+        //if type is UNTIL compare the cutoff times, otherwise return equal
+        if (cutoffType == CutoffType.UNTIL)
+            return cutoffTime.equals(that.cutoffTime);
+        return true;
+    }
 
 
     @Override

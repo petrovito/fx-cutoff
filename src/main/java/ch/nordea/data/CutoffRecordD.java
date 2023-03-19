@@ -17,6 +17,10 @@ import java.time.LocalTime;
  */
 @Data
 @Entity
+@Table(name = "cutoff_record", indexes = {
+        @Index(name = "idx_cutoff_record_currency", columnList = "currency_id", unique = true),
+        @Index(name = "idx_cutoff_record_date", columnList = "date")
+})
 public class CutoffRecordD {
 
     @Id
@@ -26,14 +30,14 @@ public class CutoffRecordD {
     /**
      * The currency for which the cutoff time is defined.
      */
-    @Column
+    @JoinColumn(name = "currency_id", nullable = false)
     @ManyToOne(fetch = FetchType.EAGER)
     private CurrencyD currency;
 
     /**
      * The date for which the cutoff time is defined.
      */
-    @Column
+    @Column(name = "date", nullable = false)
     private LocalDate date;
 
     /**
@@ -55,10 +59,7 @@ public class CutoffRecordD {
         CutoffRecord cutoffRecord = new CutoffRecord();
         cutoffRecord.setCurrency(currency.toWeb());
         cutoffRecord.setDate(date);
-        CutoffTime cutoff = new CutoffTime();
-        cutoff.setCutoffType(cutoffType);
-        cutoff.setCutoffTime(cutoffTime);
-        cutoffRecord.setCutoffTime(cutoff);
+        cutoffRecord.setCutoffTime(new CutoffTime(cutoffType, cutoffTime));
         return cutoffRecord;
     }
 

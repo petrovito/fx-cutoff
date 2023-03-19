@@ -12,6 +12,9 @@ import lombok.Data;
  */
 @Data
 @Entity
+@Table(name = "currency", indexes = {
+        @Index(name = "idx_currency_iso_code", columnList = "iso_code", unique = true)
+})
 public class CurrencyD {
 
     @Id
@@ -21,7 +24,7 @@ public class CurrencyD {
     /**
      * The ISO code of the currency.
      */
-    @Column
+    @Column(name = "iso_code")
     private String isoCode;
 
     /**
