@@ -51,21 +51,20 @@ class CutoffTimeServiceTest {
                 invocation -> {
                     String isoCode = invocation.getArgument(0);
                     LocalDate date = invocation.getArgument(1);
-                    if (date.equals(LocalDate.of(2019, 1, 1))) {
-                        return Optional.empty();
-                    }
                     if (date.equals(LocalDate.of(2020, 1, 1))) {
                         switch (isoCode) {
                             case "EUR" -> {
                                 CutoffRecordD cutoffRecordD = new CutoffRecordD();
                                 cutoffRecordD.setCutoffTime(LocalTime.of(12, 0));
                                 cutoffRecordD.setCutoffType(CutoffType.UNTIL);
+                                cutoffRecordD.setCurrency(currencyRepository.findByIsoCode(isoCode).get());
                                 return Optional.of(cutoffRecordD);
                             }
                             case "USD" -> {
                                 CutoffRecordD cutoffRecordD = new CutoffRecordD();
                                 cutoffRecordD.setCutoffTime(LocalTime.of(15, 0));
                                 cutoffRecordD.setCutoffType(CutoffType.UNTIL);
+                                cutoffRecordD.setCurrency(currencyRepository.findByIsoCode(isoCode).get());
                                 return Optional.of(cutoffRecordD);
                             }
                         }
@@ -74,12 +73,14 @@ class CutoffTimeServiceTest {
                             case "EUR" -> {
                                 CutoffRecordD cutoffRecordD = new CutoffRecordD();
                                 cutoffRecordD.setCutoffType(CutoffType.ALWAYS);
+                                cutoffRecordD.setCurrency(currencyRepository.findByIsoCode(isoCode).get());
                                 return Optional.of(cutoffRecordD);
                             }
                             case "USD" -> {
                                 CutoffRecordD cutoffRecordD = new CutoffRecordD();
                                 cutoffRecordD.setCutoffTime(LocalTime.of(15, 0));
                                 cutoffRecordD.setCutoffType(CutoffType.UNTIL);
+                                cutoffRecordD.setCurrency(currencyRepository.findByIsoCode(isoCode).get());
                                 return Optional.of(cutoffRecordD);
                             }
                         }
@@ -88,11 +89,13 @@ class CutoffTimeServiceTest {
                             case "EUR" -> {
                                 CutoffRecordD cutoffRecordD = new CutoffRecordD();
                                 cutoffRecordD.setCutoffType(CutoffType.ALWAYS);
+                                cutoffRecordD.setCurrency(currencyRepository.findByIsoCode(isoCode).get());
                                 return Optional.of(cutoffRecordD);
                             }
                             case "USD" -> {
                                 CutoffRecordD cutoffRecordD = new CutoffRecordD();
                                 cutoffRecordD.setCutoffType(CutoffType.NEVER);
+                                cutoffRecordD.setCurrency(currencyRepository.findByIsoCode(isoCode).get());
                                 return Optional.of(cutoffRecordD);
                             }
                         }
@@ -101,6 +104,7 @@ class CutoffTimeServiceTest {
                             case "EUR", "USD" -> {
                                 CutoffRecordD cutoffRecordD = new CutoffRecordD();
                                 cutoffRecordD.setCutoffType(CutoffType.ALWAYS);
+                                cutoffRecordD.setCurrency(currencyRepository.findByIsoCode(isoCode).get());
                                 return Optional.of(cutoffRecordD);
                             }
                         }

@@ -6,6 +6,6 @@ import java.time.LocalDate;
 
 public interface CutoffProvider {
 
-    CutoffTime getCutoffTime(String currency1, String currency2, LocalDate date);
+    CutoffTime getCutoffTime(String iso1, String iso2, LocalDate date);
 
 }
