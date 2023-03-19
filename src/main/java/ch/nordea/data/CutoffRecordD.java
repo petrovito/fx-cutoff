@@ -18,7 +18,7 @@ import java.time.LocalTime;
 @Data
 @Entity
 @Table(name = "cutoff_record", indexes = {
-        @Index(name = "idx_cutoff_record_currency", columnList = "currency_id", unique = true),
+        @Index(name = "idx_cutoff_record_currency", columnList = "currency_id"),
         @Index(name = "idx_cutoff_record_date", columnList = "date")
 })
 public class CutoffRecordD {

@@ -5,6 +5,7 @@ import ch.nordea.repository.CutoffRepository;
 import ch.nordea.web.Currency;
 import ch.nordea.web.CutoffTime;
 import org.apache.commons.lang3.ObjectUtils;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,8 @@ import java.time.LocalDate;
 
 @Service
 public class CutoffTimeService implements CutoffProvider {
+
+    Logger logger = org.slf4j.LoggerFactory.getLogger(CutoffTimeService.class);
 
     @Autowired
     CurrencyRepository currencyRepository;
@@ -40,14 +43,18 @@ public class CutoffTimeService implements CutoffProvider {
     //TODO caching
     private CutoffTime getCutoffTimeForCurrency(String currency, LocalDate date) {
         return cutoffRepository.findByCurrency_IsoCodeAndDate(currency, date)
-                .orElseThrow(() -> new RuntimeException("no cutoff time found for " + currency + " on " + date))
-                .toWeb().getCutoffTime();
+                .orElseThrow(() -> {
+                    logger.error("no cutoff time found for {} on {}", currency, date);
+                    return new RuntimeException("no cutoff time found for " + currency + " on " + date);
+                }).toWeb().getCutoffTime();
     }
 
     private Currency getCurrency(String currency) {
         return currencyRepository.findByIsoCode(currency)
-                .orElseThrow(() -> new RuntimeException("no currency found for " + currency))
-                .toWeb();
+                .orElseThrow(() -> {
+                    logger.error("no cutoff time found for {}", currency);
+                    return new RuntimeException("no cutoff time found for " + currency);
+                }).toWeb();
     }
 
 

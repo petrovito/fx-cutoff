@@ -12,6 +12,9 @@ import java.time.LocalTime;
 @AllArgsConstructor
 public class CutoffTime implements Comparable<CutoffTime> {
 
+    public static final CutoffTime ALWAYS = new CutoffTime(CutoffType.ALWAYS, null);
+    public static final CutoffTime NEVER = new CutoffTime(CutoffType.NEVER, null);
+
     /**
      * Type of cutoff: NEVER, UNTIL, ALWAYS. If UNTIL then the cutoffTime is also set.
      */

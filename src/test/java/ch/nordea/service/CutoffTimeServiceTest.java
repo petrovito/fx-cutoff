@@ -12,6 +12,7 @@ import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.TestPropertySource;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -23,6 +24,9 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
+@TestPropertySource(properties = {
+        "ch.populate-db=false"
+})
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class CutoffTimeServiceTest {
 

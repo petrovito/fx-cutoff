@@ -1,0 +1,12 @@
+== Request cutoff time for currency pair
+
+Request cutoff time for currency pair for a given date, i.e. the  deadline for when a trade can be made.
+
+
+include::{snippets}/cutoff/http-request.adoc[]
+=== Request parameters
+include::{snippets}/cutoff/query-parameters.adoc[]
+=== Response fields
+include::{snippets}/cutoff/response-fields.adoc[]
+=== Example curl request
+include::{snippets}/cutoff/curl-request.adoc[]
