@@ -7,6 +7,7 @@ import ch.nordea.web.CutoffTime;
 import org.apache.commons.lang3.ObjectUtils;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -40,7 +41,7 @@ public class CutoffTimeService implements CutoffProvider {
         }
     }
 
-    //TODO caching
+    @Cacheable("cutoffRecords")
     private CutoffTime getCutoffTimeForCurrency(String currency, LocalDate date) {
         return cutoffRepository.findByCurrency_IsoCodeAndDate(currency, date)
                 .orElseThrow(() -> {
@@ -49,6 +50,7 @@ public class CutoffTimeService implements CutoffProvider {
                 }).toWeb().getCutoffTime();
     }
 
+    @Cacheable("currencies")
     private Currency getCurrency(String currency) {
         return currencyRepository.findByIsoCode(currency)
                 .orElseThrow(() -> {

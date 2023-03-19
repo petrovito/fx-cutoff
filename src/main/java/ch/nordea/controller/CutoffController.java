@@ -1,5 +1,6 @@
 package ch.nordea.controller;
 
+import ch.nordea.service.CutoffProvider;
 import ch.nordea.service.CutoffTimeService;
 import ch.nordea.web.CutoffTime;
 import org.slf4j.Logger;
@@ -19,7 +20,7 @@ public class CutoffController {
     Logger logger = org.slf4j.LoggerFactory.getLogger(CutoffController.class);
 
     @Autowired
-    private CutoffTimeService cutoffTimeService;
+    private CutoffProvider cutoffProvider;
 
     @RequestMapping(value = "/time", method = GET)
     public CutoffTime getCutoffTime(
@@ -28,7 +29,7 @@ public class CutoffController {
             @RequestParam(value = "date") LocalDate date
     ) {
         logger.debug("Requesting cutoff time for currencies {} and {} on date {}", iso1, iso2, date);
-        return cutoffTimeService.getCutoffTime(iso1, iso2, date);
+        return cutoffProvider.getCutoffTime(iso1, iso2, date);
     }
 
 }
